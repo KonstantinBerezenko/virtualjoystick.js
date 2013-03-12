@@ -155,15 +155,17 @@ VirtualJoystick.prototype._onMouseUp	= function(event)
 
 VirtualJoystick.prototype._onMouseDown	= function(event)
 {
-	var x	= event.clientX;
-	var y	= event.clientY;
+	var rect = this._container.getBoundingClientRect();
+	var x	= event.clientX - rect.left;
+	var y	= event.clientY - rect.top;
 	return this._onDown(x, y);
 }
 
 VirtualJoystick.prototype._onMouseMove	= function(event)
 {
-	var x	= event.clientX;
-	var y	= event.clientY;
+	var rect = this._container.getBoundingClientRect();
+	var x	= event.clientX - rect.left;
+	var y	= event.clientY - rect.top;
 	return this._onMove(x, y);
 }
 
@@ -173,8 +175,9 @@ VirtualJoystick.prototype._onTouchStart	= function(event)
 
 	event.preventDefault();
 
-	var x	= event.touches[ 0 ].pageX;
-	var y	= event.touches[ 0 ].pageY;
+	var rect = this._container.getBoundingClientRect();
+	var x	= event.touches[ 0 ].pageX - rect.left;
+	var y	= event.touches[ 0 ].pageY - rect.top;
 	return this._onDown(x, y)
 }
 
@@ -193,8 +196,9 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 
 	event.preventDefault();
 
-	var x	= event.touches[ 0 ].pageX;
-	var y	= event.touches[ 0 ].pageY;
+	var rect = this._container.getBoundingClientRect();
+	var x	= event.touches[ 0 ].pageX - rect.left;
+	var y	= event.touches[ 0 ].pageY - rect.top;
 	return this._onMove(x, y)
 }
 

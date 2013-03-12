@@ -11,4 +11,5 @@ which is display for the *stick* of the joystick.
 which is display for its *base*.
 * Both elements are optional with sensible default
 * you may set ```opts.mouseSupport``` to true during debug.
+* Can create multiple joystick instances
 

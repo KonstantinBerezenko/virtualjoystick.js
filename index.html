@@ -24,8 +24,18 @@
 		#info a:hover {
 			text-decoration	: underline;
 		}
-		#container {
-			width		: 100%;
+		#container1 {
+			width		: 50%;
+			height		: 100%;
+			overflow	: hidden;
+			padding		: 0;
+			margin		: 0;
+			float:left;
+			-webkit-user-select	: none;
+			-moz-user-select	: none;
+		}
+		#container2 {
+			width		: 50%;
 			height		: 100%;
 			overflow	: hidden;
 			padding		: 0;
@@ -36,38 +46,35 @@
 		</style>
 	</head>
 	<body>
-		<div id="container"></div>
+		<div id="container1"></div>
+		<div id="container2"></div>
 		<div id="info">
-			<a href="http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/" target="_blank">VirtualJoystick.js</a>
-			A library javascript to provide a virtual joystick on touchscreen.
-			-
-			inspired by this
-			<a href="http://sebleedelisle.com/2011/04/multi-touch-game-controller-in-javascripthtml5-for-ipad/">post</a>
-			from
-			<a href="http://sebleedelisle.com/">seb.ly</a>
-			<br/>
 			Touch the screen and move
-			-
-			works with mouse too as debug
 			<br/>
 			<span id="result"></span>
 		</div> 
 		<script src="virtualjoystick.js"></script>
 		<script>
 			console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
-			var joystick	= new VirtualJoystick({
-				container	: document.getElementById('container'),
+			var joystick1	= new VirtualJoystick({
+				container	: document.getElementById('container1'),
+				mouseSupport	: true
+			});
+			var joystick2	= new VirtualJoystick({
+				container	: document.getElementById('container2'),
 				mouseSupport	: true
 			});
 			setInterval(function(){
 				var outputEl	= document.getElementById('result');
 				outputEl.innerHTML	= '<b>Result:</b> '
-					+ ' dx:'+joystick.deltaX()
-					+ ' dy:'+joystick.deltaY()
-					+ (joystick.right()	? ' right'	: '')
-					+ (joystick.up()	? ' up'		: '')
-					+ (joystick.left()	? ' left'	: '')
-					+ (joystick.down()	? ' down' 	: '');		
+					+ (joystick1.deltaX() != 0? ' dx:'+joystick1.deltaX(): '')
+					+ (joystick1.deltaY() != 0? ' dy:'+joystick1.deltaY(): '')
+					+ (joystick1.right()	? ' right'	: '')
+					+ (joystick1.up()	? ' up'		: '')
+					+ (joystick1.left()	? ' left'	: '')
+					+ (joystick1.down()	? ' down' 	: '')
+					+ (joystick2.deltaX() > 0? ' rotate clockwise:'+joystick2.deltaX(): '')
+					+ (joystick2.deltaX() < 0? ' rotate counterclockwise:'+Math.abs(joystick2.deltaX()): '');
 
 			}, 1/30 * 1000);
 		</script>
